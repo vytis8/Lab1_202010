@@ -53,8 +53,11 @@ while True:
                 print("La lista esta vacía")  
             else:
                 movieName =input('Ingrese parte del titulo de la pelicula\n')
+                t1_start = process_time() #tiempo inicial
                 moviesCount=countMoviesByName(movieName,lista)
+                t1_stop = process_time() #tiempo final
                 print("Peliculas que contienen '", movieName ,"' en el titulo: ",moviesCount)
+                print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
         elif int(inputs[0])==4: #opcion 4
             lastName =input('Ingrese el apellido del director\n')
             moviesCount=countGoodMoviesByDirector(lastName,lista)
