@@ -3,10 +3,9 @@ import sys
 import csv
 from time import process_time 
 
-def loadCSVFile (file, lst):
-    #input_file = csv.DictReader(open(file),dialect=csv.Sniffer())
+def loadCSVFile (file, lst, sep=";"):
     with open(file) as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=';')
+        spamreader = csv.reader(csvfile, delimiter=sep)
         for row in spamreader:
             lst.append(row)
 
