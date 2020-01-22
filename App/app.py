@@ -59,7 +59,7 @@ def countMoviesByName(movieMame, lst):
     """
     Retorna cuantas peliculas en su titulo incluyen una palabra clave  
     """
-    if len(lista)==0:
+    if len(lst)==0:
         print("La lista esta vacía")  
         return 0
     else:
