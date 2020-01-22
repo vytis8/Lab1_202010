@@ -42,25 +42,26 @@ def countGoodMoviesByDirector(lastName, lst):
     return 0
 
 
-lista = [] #instanciar una lista vacia
-while True:
-    printMenu() #imprimir el menu de opciones en consola
-    inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
-    if len(inputs)>0:
-        if int(inputs[0])==1: #opcion 1
-            loadCSVFile("Data/themoviesdb/SmallMoviesDetailsCleaned.csv", lista) #llamar funcion cargar datos
-            print("Datos cargados, "+str(len(lista))+" elementos cargados")
-        elif int(inputs[0])==2: #opcion 2
-            if len(lista)==0:
-                print("La lista esta vacía")    
-            else: print("La lista tiene "+str(len(lista))+" elementos")
-        elif int(inputs[0])==3: #opcion 3
-            movieName =input('Ingrese parte del titulo de la pelicula\n')
-            moviesCount=countMoviesByName(movieName,lista)
-            print("Peliculas que contienen '", movieName ,"' en el titulo: ",moviesCount)
-        elif int(inputs[0])==4: #opcion 4
-            lastName =input('Ingrese el apellido del director\n')
-            moviesCount=countGoodMoviesByDirector(lastName,lista)
-            print("Peliculas con calificación positiva de '", lastName ,"':",moviesCount," en construcción ...")
-        elif int(inputs[0])==0: #opcion 0, salir
-            sys.exit(0)
+if __name__ == "__main__":
+    lista = [] #instanciar una lista vacia
+    while True:
+        printMenu() #imprimir el menu de opciones en consola
+        inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
+        if len(inputs)>0:
+            if int(inputs[0])==1: #opcion 1
+                loadCSVFile("Data/themoviesdb/SmallMoviesDetailsCleaned.csv", lista) #llamar funcion cargar datos
+                print("Datos cargados, "+str(len(lista))+" elementos cargados")
+            elif int(inputs[0])==2: #opcion 2
+                if len(lista)==0:
+                    print("La lista esta vacía")    
+                else: print("La lista tiene "+str(len(lista))+" elementos")
+            elif int(inputs[0])==3: #opcion 3
+                movieName =input('Ingrese parte del titulo de la pelicula\n')
+                moviesCount=countMoviesByName(movieName,lista)
+                print("Peliculas que contienen '", movieName ,"' en el titulo: ",moviesCount)
+            elif int(inputs[0])==4: #opcion 4
+                lastName =input('Ingrese el apellido del director\n')
+                moviesCount=countGoodMoviesByDirector(lastName,lista)
+                print("Peliculas con calificación positiva de '", lastName ,"':",moviesCount," en construcción ...")
+            elif int(inputs[0])==0: #opcion 0, salir
+                sys.exit(0)
