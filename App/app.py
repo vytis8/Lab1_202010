@@ -38,8 +38,10 @@ def loadCSVFile (file, lst, sep=";"):
     del lst[:]
     print("Cargando archivo ....")
     t1_start = process_time() #tiempo inicial
+    dialect = csv.excel()
+    dialect.delimiter=sep
     with open(file) as csvfile:
-        spamreader = csv.reader(csvfile, delimiter=sep)
+        spamreader = csv.DictReader(csvfile, dialect=dialect)
         for row in spamreader: 
             lst.append(row)
     t1_stop = process_time() #tiempo final
@@ -80,22 +82,22 @@ def countElementsByCriteria(criteria, column, lst):
     return 0
 
 
-if __name__ == "__main__":
+def main():
     lista = [] #instanciar una lista vacia
     while True:
         printMenu() #imprimir el menu de opciones en consola
         inputs =input('Seleccione una opción para continuar\n') #leer opción ingresada
         if len(inputs)>0:
             if int(inputs[0])==1: #opcion 1
-                loadCSVFile("Data/themoviesdb/SmallMoviesDetailsCleaned.csv", lista) #llamar funcion cargar datos
+                loadCSVFile("Data/test.csv", lista) #llamar funcion cargar datos
                 print("Datos cargados, "+str(len(lista))+" elementos cargados")
             elif int(inputs[0])==2: #opcion 2
-                if len(lista)==0:
+                if len(lista)==0: #obtener la longitud de la lista
                     print("La lista esta vacía")    
                 else: print("La lista tiene "+str(len(lista))+" elementos")
             elif int(inputs[0])==3: #opcion 3
                 criteria =input('Ingrese el criterio de búsqueda\n')
-                counter=countElementsFilteredByColumn(criteria,5,lista)
+                counter=countElementsFilteredByColumn(criteria, "nombre", lista) #filtrar una columna por criterio  
                 print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #opcion 4
                 criteria =input('Ingrese el criterio de búsqueda\n')
@@ -103,3 +105,6 @@ if __name__ == "__main__":
                 print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
+
+if __name__ == "__main__":
+    main()
