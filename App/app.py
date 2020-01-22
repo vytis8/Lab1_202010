@@ -35,6 +35,7 @@ def loadCSVFile (file, lst, sep=";"):
     """
     Carga un archivo csv a una lista
     """
+    del lst[:]
     print("Cargando archivo ....")
     t1_start = process_time() #tiempo inicial
     with open(file) as csvfile:
@@ -51,30 +52,30 @@ def printMenu():
     print("\nBienvenido")
     print("1- Cargar Datos")
     print("2- Contar los elementos de la Lista")
-    print("3- Cantidad de peliculas por titulo")
-    print("4- Cantidad de peliculas con calificaciones positivas (>=6) de un director")
+    print("3- Contar elementos filtrados por palabra clave")
+    print("4- Consultar elementos a partir de dos listas")
     print("0- Salir")
 
-def countMoviesByName(movieMame, lst):
+def countElementsFilteredByColumn(criteria, column, lst):
     """
-    Retorna cuantas peliculas en su titulo incluyen una palabra clave  
+    Retorna cuantos elementos coinciden con un criterio para una columna dada  
     """
-    if len(lista)==0:
+    if len(lst)==0:
         print("La lista esta vacía")  
         return 0
     else:
         t1_start = process_time() #tiempo inicial
-        moviesCount=0
-        for mov in lst:
-            if movieMame.lower() in mov[5].lower(): #comparar con el titulo (columna 5)
-                moviesCount+=1
+        counter=0
+        for element in lst:
+            if criteria.lower() in element[column].lower(): #filtrar por palabra clave 
+                counter+=1
         t1_stop = process_time() #tiempo final
         print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
-    return moviesCount
+    return counter
 
-def countGoodMoviesByDirector(lastName, lst):
+def countElementsByCriteria(criteria, column, lst):
     """
-    Retorna la cantidad de peliculas con calificación >= 6 para un nombre de director dado
+    Retorna la cantidad de elementos que cumplen con un criterio para una columna dada
     """
     return 0
 
@@ -93,12 +94,12 @@ if __name__ == "__main__":
                     print("La lista esta vacía")    
                 else: print("La lista tiene "+str(len(lista))+" elementos")
             elif int(inputs[0])==3: #opcion 3
-                movieName =input('Ingrese parte del titulo de la pelicula\n')
-                moviesCount=countMoviesByName(movieName,lista)
-                print("Peliculas que contienen '", movieName ,"' en el titulo: ",moviesCount)
+                criteria =input('Ingrese el criterio de búsqueda\n')
+                counter=countElementsFilteredByColumn(criteria,5,lista)
+                print("Coinciden ",counter," elementos con el crtierio: ", criteria  )
             elif int(inputs[0])==4: #opcion 4
-                lastName =input('Ingrese el apellido del director\n')
-                moviesCount=countGoodMoviesByDirector(lastName,lista)
-                print("Peliculas con calificación positiva de '", lastName ,"':",moviesCount," en construcción ...")
+                criteria =input('Ingrese el criterio de búsqueda\n')
+                counter=countElementsByCriteria(criteria,0,lista)
+                print("Coinciden ",counter," elementos con el crtierio: '", criteria ,"' (en construcción ...)")
             elif int(inputs[0])==0: #opcion 0, salir
                 sys.exit(0)
