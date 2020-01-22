@@ -1,9 +1,40 @@
+"""
+ * Copyright 2020, Departamento de sistemas y Computación, Universidad de Los Andes
+ * 
+ * Contribución de:
+ *
+ * Cristian Camilo Castellanos
+ *
+ * Desarrolado para el curso ISIS1225 - Estructuras de Datos y Algoritmos
+ *
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ """
+
+"""
+  Este módulo es una aplicación básica con un menú de opciones para cargar datos, contar elementos, y hacer búsquedas sobre una lista.
+"""
+
 import config as cf
 import sys
 import csv
 from time import process_time 
 
 def loadCSVFile (file, lst, sep=";"):
+    """
+    Carga un archivo csv a una lista
+    """
     print("Cargando archivo ....")
     t1_start = process_time() #tiempo inicial
     with open(file) as csvfile:
@@ -14,6 +45,9 @@ def loadCSVFile (file, lst, sep=";"):
     print("Tiempo de ejecución ",t1_stop-t1_start," segundos")
 
 def printMenu():
+    """
+    Imprime el menu de opciones
+    """
     print("\nBienvenido")
     print("1- Cargar Datos")
     print("2- Contar los elementos de la Lista")
@@ -22,7 +56,9 @@ def printMenu():
     print("0- Salir")
 
 def countMoviesByName(movieMame, lst):
-    #Contar la cantidad de peliculas con titulo que inclue movieName
+    """
+    Retorna cuantas peliculas en su titulo incluyen una palabra clave  
+    """
     if len(lista)==0:
         print("La lista esta vacía")  
         return 0
@@ -37,8 +73,9 @@ def countMoviesByName(movieMame, lst):
     return moviesCount
 
 def countGoodMoviesByDirector(lastName, lst):
-    #Contar la cantidad de peliculas con calificación promedio >= 6
-    #Donde el director tiene el apellido=lastName
+    """
+    Retorna la cantidad de peliculas con calificación >= 6 para un nombre de director dado
+    """
     return 0
 
 
