@@ -40,7 +40,7 @@ def loadCSVFile (file, lst, sep=";"):
     t1_start = process_time() #tiempo inicial
     dialect = csv.excel()
     dialect.delimiter=sep
-    with open(file) as csvfile:
+    with open(file, encoding="utf-8") as csvfile:
         spamreader = csv.DictReader(csvfile, dialect=dialect)
         for row in spamreader: 
             lst.append(row)
